@@ -1,6 +1,13 @@
+
 .MovieCard{
     margin-top: 12px;
     margin-left: 12px;
+}
+
+.MoviePoster{
+    background-color: var(--disabled);
+    width: 100%;
+    height: 220px;
 }
 
 .CardHeading{
@@ -12,13 +19,21 @@
     font-size: 12px;
 }
 
-.Title{
-    color: #4a4a4a;
+.Title {
+    color: var(--gray);
     font-weight: bold;
 }
+
 .Description{
-    color: #9b9b9b;
+    color: var(--light-gray);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.RemainingLines{
+    color: var(--light-gray);
 }
 .Rating{
-    color: #dfdfdf;
+    color: var(--disabled);
 }

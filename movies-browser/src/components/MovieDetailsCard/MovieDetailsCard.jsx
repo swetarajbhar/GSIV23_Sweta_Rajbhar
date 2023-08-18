@@ -1,22 +1,16 @@
 import * as React from 'react';
-import MovieLogo from "../../assets/JPG/iguana.jpg";
-
-import { CardActionArea } from '@mui/material';
-
 import "./MovieDetailsCard.scss"
 
-
-const MovieDetailsCard = () => {
+const MovieDetailsCard = ({data}) => {
 
   return (
-
     <div className='MovieDetailsCard'>
-
-      <div class="container">
-        <div class="box1 red">
+      {console.log('MOVIE DATA :', data)}
+      <div className="container">
+        <div className="MovieImage">
           <img src="https://i.imgur.com/aHu0Tzg.jpeg" width="100%"></img>
         </div>
-        <div class="box2 green">
+        <div className="MovieInfo">
           <div className='MovieTitle'>
             Movie Title
             <span> (Rating)</span>
@@ -26,7 +20,7 @@ const MovieDetailsCard = () => {
           <p>Cast: Actor1, Actor2,..</p>
           </div>
           
-         <p style={{    marginTop: "0.5em"}}> long details description...asdj aksdkajshkdjasdhakjshdasjh dajsd asdasj
+         <p style={{marginTop: "0.5em"}}> long details description...asdj aksdkajshkdjasdhakjshdasjh dajsd asdasj
           dlasjd asdka slkdaslk</p>
         </div>
       </div>

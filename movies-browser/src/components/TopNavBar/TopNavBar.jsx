@@ -15,15 +15,18 @@ import { useNavigate } from "react-router-dom";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#DFDFDF',
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
+    borderRadius: theme.shape.borderRadius * 2,
+    backgroundColor: 'var(--disabled)',
+    marginRight: theme.spacing(0),
+    display: 'flex',
+    justifyContent: 'flex-start',
+    marginLeft: '0 !important',
+    textAlign: 'start',
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
+        marginLeft: theme.spacing(0),   
         width: 'auto',
-    },
+    },     
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -34,22 +37,22 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#9B9B9B', // Change the color of the SearchIcon
+    color: 'var(--light-gray)', // Change the color of the SearchIcon
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: '#4A4A4A', // Change the color of the search text
+    color: 'var(--gray)', // Change the color of the search text
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
-            width: '20ch',
+            width: '70ch',
         },
     },
     '& .MuiInputBase-input::placeholder': {
-        color: '#9B9B9B', // Change the color of the placeholder text
+        color: 'var(--light-gray)', // Change the color of the placeholder text
         fontWeight: 'bold',
     },
 }));
@@ -66,10 +69,6 @@ const TopNavBar = (
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const handleProfileMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
     };
@@ -81,7 +80,6 @@ const TopNavBar = (
 
     const navigate = useNavigate()
     const onHomeClick = () => {
-        console.log('ON HOME CLICK')
         navigate('/list')
     }
     const menuId = 'primary-search-account-menu';
@@ -157,7 +155,7 @@ const TopNavBar = (
                             variant="h6"
                             noWrap
                             component="div"
-                            color="#4a4a4a"
+                            color="var(--gray)"
                             fontWeight="bold"
                         >
                             Movie Details
