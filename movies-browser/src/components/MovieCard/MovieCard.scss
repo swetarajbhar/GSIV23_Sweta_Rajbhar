@@ -1,4 +1,24 @@
 .MovieCard{
-    margin-top: 5px;
-    margin-left: 5px;
+    margin-top: 12px;
+    margin-left: 12px;
+}
+
+.CardHeading{
+    display         : flex;
+    justify-content : space-between;
+}
+
+.CardContent{
+    font-size: 12px;
+}
+
+.Title{
+    color: #4a4a4a;
+    font-weight: bold;
+}
+.Description{
+    color: #9b9b9b;
+}
+.Rating{
+    color: #dfdfdf;
 }

@@ -1,11 +1,13 @@
 import React from "react";
-
+import MovieCard from "../../components/MovieCard/MovieCard";
+import TopNavBar from "../../components/TopNavBar/TopNavBar";
 const List = ()=>{
 
     return(
-        <div>
-            <h1>Listing Page</h1>
-        </div>
+       <>
+       <TopNavBar/>
+       <MovieCard/> 
+       </>
     )
 }
 
