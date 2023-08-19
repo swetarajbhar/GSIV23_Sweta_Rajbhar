@@ -21,8 +21,7 @@ const MovieCard = ({ data }) => {
   }
 
   return (
-    <div className='MovieCard'>
-      <Card sx={{ maxWidth: 200, borderRadius: 2, boxShadow: '0px 4px 3px rgba(0, 0, 0, 0.3)' }}>
+      <Card sx={{ borderRadius: 2, boxShadow: '0px 4px 3px rgba(0, 0, 0, 0.3)' }}>
         <CardActionArea onClick={() => openDetailsPage(get(data, 'id'))}>
           {get(data, 'picture') ? (
             <CardMedia
@@ -51,7 +50,6 @@ const MovieCard = ({ data }) => {
           </CardContent>
         </CardActionArea>
       </Card>
-    </div>
   );
 }
 

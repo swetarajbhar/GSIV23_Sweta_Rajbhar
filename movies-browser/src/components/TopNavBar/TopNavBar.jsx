@@ -28,9 +28,9 @@ const Search = styled('div')(({ theme }) => ({
     marginRight: theme.spacing(0),
     display: 'flex',
     justifyContent: 'flex-start',
-    marginLeft: '0 !important',
+    margin: '0em 0.2em',
     textAlign: 'start',
-    width: '100%',
+    width: '70%',
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(0),
         width: 'auto',
