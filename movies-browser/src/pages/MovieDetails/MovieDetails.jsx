@@ -1,24 +1,24 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopNavBar from "../../components/TopNavBar/TopNavBar";
 import MovieDetailsCard from "../../components/MovieDetailsCard/MovieDetailsCard";
 import { movieDetails } from "../../api/details";
 import { useLocation } from 'react-router';
 
 let movieId = '';
-const MovieDetails = ()=>{
+const MovieDetails = () => {
     movieId = useLocation().pathname.split('/')[2] || '';
-    const [movieDetail,setMovieDetail] = useState({});
-    useEffect(()=>{
-        movieDetails(movieId).then((res)=>{
-            setMovieDetail(res.data);     
-        }).catch((err)=>{
+    const [movieDetail, setMovieDetail] = useState({});
+    useEffect(() => {
+        movieDetails(movieId).then((res) => {
+            setMovieDetail(res.data);
+        }).catch((err) => {
             setMovieDetail({});
         });
-    },[])
-    return(
+    }, [])
+    return (
         <>
-        <TopNavBar isListingPageOpen={false} isDetailsPageOpen={true}/>
-        <MovieDetailsCard data={movieDetail}/>
+            <TopNavBar isListingPageOpen={false} isDetailsPageOpen={true} />
+            <MovieDetailsCard data={movieDetail} />
         </>
     )
 }

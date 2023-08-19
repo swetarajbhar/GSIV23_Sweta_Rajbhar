@@ -10,10 +10,16 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
-import { useState,useEffect } from 'react';
 
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { searchMovieList } from '../../api/listing';
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+    searchMovies,
+    onSearchChange,
+    fetchAllMovies,
+} from "../../features/topNavBar/searchSlice";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -26,9 +32,9 @@ const Search = styled('div')(({ theme }) => ({
     textAlign: 'start',
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(0),   
+        marginLeft: theme.spacing(0),
         width: 'auto',
-    },     
+    },
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -59,28 +65,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const TopNavBar = ({isListingPageOpen = false,isDetailsPageOpen = false,setMovieDataOnChange}) => {
+const TopNavBar = ({ isListingPageOpen = false, isDetailsPageOpen = false}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    const [searchText, setSearchText] = useState('');
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleSearchInputChange = (event) => {
-        setSearchText(event.target.value);
+        const { value } = event.target;
+        dispatch(onSearchChange(value));
     };
-
-    const handleSearchData = ()=>{
-        const searchParams = {
-            query: searchText
-        }
-        searchMovieList(searchParams).then((res)=>{
-            setMovieDataOnChange(res.data);
-        }).catch((error)=>{
-            setSearchText('');
-        })
-    }
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
@@ -146,10 +141,16 @@ const TopNavBar = ({isListingPageOpen = false,isDetailsPageOpen = false,setMovie
         </Menu>
     );
 
-    useEffect(()=>{
-        handleSearchData();
-    },[searchText])    
+    const { searchValue,page } = useSelector((state) => state.search);
 
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (searchValue === "") {
+            dispatch(fetchAllMovies(page));
+        } else {
+            dispatch(searchMovies({searchValue,page}));
+        }
+    }, [dispatch, searchValue,page]);
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{ bgcolor: "white" }}>
@@ -162,7 +163,7 @@ const TopNavBar = ({isListingPageOpen = false,isDetailsPageOpen = false,setMovie
                             <StyledInputBase
                                 placeholder="Search"
                                 inputProps={{ 'aria-label': 'search' }}
-                                value={searchText}
+                                value={searchValue}
                                 onChange={handleSearchInputChange}
                             />
                         </Search>
