@@ -10,8 +10,10 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
+import { useState,useEffect } from 'react';
 
 import { useNavigate } from "react-router-dom";
+import { searchMovieList } from '../../api/listing';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -57,17 +59,28 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const TopNavBar = (
-    isListingPageOpen,
-    isDetailsPageOpen
-) => {
-    isListingPageOpen = true;
-    isDetailsPageOpen = false;
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+const TopNavBar = ({isListingPageOpen = false,isDetailsPageOpen = false,setMovieDataOnChange}) => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+    const [searchText, setSearchText] = useState('');
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleSearchInputChange = (event) => {
+        setSearchText(event.target.value);
+    };
+
+    const handleSearchData = ()=>{
+        const searchParams = {
+            query: searchText
+        }
+        searchMovieList(searchParams).then((res)=>{
+            setMovieDataOnChange(res.data);
+        }).catch((error)=>{
+            setSearchText('');
+        })
+    }
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
@@ -133,7 +146,9 @@ const TopNavBar = (
         </Menu>
     );
 
-
+    useEffect(()=>{
+        handleSearchData();
+    },[searchText])    
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -147,6 +162,8 @@ const TopNavBar = (
                             <StyledInputBase
                                 placeholder="Search"
                                 inputProps={{ 'aria-label': 'search' }}
+                                value={searchText}
+                                onChange={handleSearchInputChange}
                             />
                         </Search>
                     }{

@@ -1,5 +1,7 @@
 .MovieWrapper{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
 }

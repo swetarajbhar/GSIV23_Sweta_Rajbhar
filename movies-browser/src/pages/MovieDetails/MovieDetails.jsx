@@ -17,7 +17,7 @@ const MovieDetails = ()=>{
     },[])
     return(
         <>
-        <TopNavBar/>
+        <TopNavBar isListingPageOpen={false} isDetailsPageOpen={true}/>
         <MovieDetailsCard data={movieDetail}/>
         </>
     )

@@ -23,7 +23,7 @@ const MovieCard = ({ data }) => {
   return (
     <div className='MovieCard'>
       <Card sx={{ maxWidth: 200, borderRadius: 2, boxShadow: '0px 4px 3px rgba(0, 0, 0, 0.3)' }}>
-        <CardActionArea onClick={()=>openDetailsPage(get(data, 'id'))}>
+        <CardActionArea onClick={() => openDetailsPage(get(data, 'id'))}>
           {get(data, 'picture') ? (
             <CardMedia
               sx={{ height: 220, objectFit: 'fill' }}
@@ -38,7 +38,7 @@ const MovieCard = ({ data }) => {
             <div className='CardContent'>
               <div className='CardHeading'>
                 <div className='Title'>{get(data, 'title')}</div>
-                <div className='Rating'>{(get(data, 'vote_average'))}</div>
+                <div className='Rating'>({get(data, 'vote_average')})</div>
               </div>
               <p className='Description'>{get(data, 'overview')}</p>
               {/* Display the remaining lines */}

@@ -6,20 +6,24 @@ import "./MovieList.scss"
 
 const MovieList = ()=>{
     const [movieData,setMovieData] = useState([]);
+
+    const setSearchData = (_data)=>{
+        console.log('_DATA :', _data);
+        setMovieData(_data);     
+    }
+
     useEffect(()=>{
-        movieList().then((res)=>{
-            console.log('RES :', res);
+        movieList({}).then((res)=>{
             setMovieData(res.data);     
         }).catch((err)=>{
-            console.log('Err:', err);
             setMovieData([]);
         });
     },[])
     return(
        <>
-       <TopNavBar/>
+       <TopNavBar isListingPageOpen={true} isDetailsPageOpen={false} setMovieDataOnChange={setSearchData}/>
        <div className="MovieWrapper">   {movieData.map((movie)=>(
-            <MovieCard data={movie}/> 
+            <MovieCard key={movie.id} data={movie}/> 
        ))}</div>
     
       

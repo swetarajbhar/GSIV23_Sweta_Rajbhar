@@ -1,27 +1,34 @@
 import * as React from 'react';
+import moment from "moment";
+import momentDurationFormatSetup from "moment-duration-format";
+import { get } from "lodash"
+
 import "./MovieDetailsCard.scss"
 
-const MovieDetailsCard = ({data}) => {
+momentDurationFormatSetup(moment);
+const MovieDetailsCard = ({ data }) => {
 
   return (
     <div className='MovieDetailsCard'>
-      {console.log('MOVIE DATA :', data)}
       <div className="container">
         <div className="MovieImage">
-          <img src="https://i.imgur.com/aHu0Tzg.jpeg" width="100%"></img>
+          {get(data, 'picture') &&
+            <img src={get(data, 'picture')} width="100%"></img>
+          }
         </div>
         <div className="MovieInfo">
           <div className='MovieTitle'>
-            Movie Title
-            <span> (Rating)</span>
+            {get(data, "title")}
+            <span> ({get(data, "vote_average")})</span>
           </div>
           <div className='MovieDetails'>
-          <p>Year | Length | Director</p>
-          <p>Cast: Actor1, Actor2,..</p>
+            <p>{get(data, "release_date")} | {
+              moment.duration(get(data, "runtime"), "seconds").format()
+            } {get(data, "director") && `| ${get(data, "director")}`}</p>
+            <p>Cast: {get(data, "cast") && get(data, "cast").toString()}</p>
           </div>
-          
-         <p style={{marginTop: "0.5em"}}> long details description...asdj aksdkajshkdjasdhakjshdasjh dajsd asdasj
-          dlasjd asdka slkdaslk</p>
+
+          <p style={{ marginTop: "0.5em" }}>Description: {get(data, "overview")}</p>
         </div>
       </div>
     </div>
